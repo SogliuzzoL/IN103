@@ -1,0 +1,16 @@
+CC=gcc
+CFLAGS=-Wall -Werror
+
+all: my_prog.x
+
+my_prog.x: complex.o solve.o my_prog.o
+	$(CC) -o $@ $^ -lm
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f my_prog.o complex.o solve.o
+
+realclean: clean
+	rm -f my_prog.x

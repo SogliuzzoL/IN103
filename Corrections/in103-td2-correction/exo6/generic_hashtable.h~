@@ -1,0 +1,64 @@
+#ifndef __GENERIC_HASHTABLE_H__
+#define __GENERIC_HASHTABLE_H__
+
+#include <stdlib.h>
+#include <stdbool.h>
+#include "generic_list.h"
+
+/** Nombre d'éléments maximal dans la table de hachage */
+#define MAXELEM 7919
+
+typedef struct {
+  void* key; /**< cle */
+  void* value; /**< valeur */
+} generic_ht_elmt_t;
+
+typedef struct {
+  int size; /**< Nombre d'éléments présents dans la table */
+  int (*compare)(const void *key1, const void *key2); /**< fonction de
+							 comparaison
+							 entre deux
+							 clés de la
+							 table de
+							 hachage */
+  void* (*build)(const void *data); /**< fonction de construction d'un
+							 élément de la
+							 liste de la
+							 table de
+							 hachage */
+  void (*destroy)(void *data); /**< fonction de destruction d'un
+							 élément de la
+							 liste de la
+							 table de
+							 hachage */
+
+  generic_list_t* table[MAXELEM];
+
+} generic_ht_t;
+
+int hashFunction (void* key);
+
+void generic_hashtable_init (generic_ht_t* ht,
+			     int (*compare) (const void *data1, const void *data2),
+			     void* (*build)(const void *data),
+			     void (*destroy)(void *data));
+
+void generic_hashtable_destroy (generic_ht_t* ht);
+
+// Insert a new element associated to key at the begining of the list
+int generic_hashtable_insert (generic_ht_t* ht, void* key, void* value);
+
+// Remove the latest inserted element associated to key and return the
+// couple (key,value) associated to the removed element
+generic_ht_elmt_t* generic_hashtable_remove (generic_ht_t* ht, void* key);
+
+// Return the latest inserted element associated to key
+generic_ht_elmt_t* generic_hashtable_lookfor (generic_ht_t* ht, void* key);
+
+bool generic_hashtable_contains (generic_ht_t* ht, void* key);
+
+int generic_hashtable_update (generic_ht_t* ht, void* key, void* value);
+
+int generic_hashtable_size (generic_ht_t* ht);
+
+#endif

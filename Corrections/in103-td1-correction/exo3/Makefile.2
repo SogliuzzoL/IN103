@@ -1,0 +1,22 @@
+CC=gcc
+CFLAGS=-Wall -Werror
+
+all: my_prog.x
+
+my_prog.x: complex.o solve.o my_prog.o
+	$(CC) -o my_prog.x complex.o solve.o my_prog.o -lm
+
+complex.o: complex.c
+	$(CC) $(CFLAGS) -c complex.c -o complex.o
+
+solve.o: solve.c
+	$(CC) $(CFLAGS) -c solve.c -o solve.o
+
+my_prog.o: my_prog.c
+	$(CC) $(CFLAGS) -c my_prog.c -o my_prog.o
+
+clean:
+	rm -f my_prog.o complex.o solve.o
+
+realclean: clean
+	rm -f my_prog.x

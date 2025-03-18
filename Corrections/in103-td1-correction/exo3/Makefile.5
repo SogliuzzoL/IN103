@@ -1,0 +1,19 @@
+SRC=complex.c solve.c my_prog.c
+OBJ=$(patsubst %.c, %.o, $(SRC))
+
+CC=gcc
+CFLAGS=-Wall -Werror
+
+all: my_prog.x
+
+my_prog.x: $(OBJ)
+	$(CC) -o $@ $^ -lm
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ)
+
+realclean: clean
+	rm -f my_prog.x
