@@ -1,5 +1,5 @@
-INC=$(HOME)/Library/libin103-1.4/include
-LIB=$(HOME)/Library/libin103-1.4/source
+INC=$(HOME)/Library/libin103-1.4.2/include
+LIB=$(HOME)/Library/libin103-1.4.2/source
 
 CC=gcc
 CFLAGS=-Wall -Werror -I$(INC)
