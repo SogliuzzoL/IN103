@@ -1,0 +1,4 @@
+INC=$(HOME)/Library/libin103-1.4.2/include
+LIB=$(HOME)/Library/libin103-1.4.2/source
+
+SHELL:=/bin/bash
